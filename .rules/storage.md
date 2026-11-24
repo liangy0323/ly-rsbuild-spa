@@ -1,0 +1,47 @@
+# 客户端存储规范
+
+## 键名与键值
+
+键名常量和实际存储值统一使用 UPPER_SNAKE_CASE，二者保持相同。固定前缀区分手工存储和 Pinia 持久化。各应用选择稳定的命名空间 `<APP>`，避免同源应用混用数据。下例用 `DEMO` 表示命名空间。
+
+| 用途 | 格式 | 示例 |
+| --- | --- | --- |
+| 手工 localStorage / sessionStorage | `STORAGE_<APP>_<DOMAIN>_<PURPOSE>` | `STORAGE_DEMO_UI_THEME` |
+| Pinia 持久化 | `PINIA_<APP>_<STORE>` | `PINIA_DEMO_LAYOUT` |
+
+新增业务实际需要存储时，先在 `src/constants/modules/storage.ts` 定义常量，再从 `@/constants` 导入。以下为命名示例，不要求提前创建未使用的存储项：
+
+```ts
+/**
+ * 应用的主题偏好存储键。
+ */
+export const STORAGE_DEMO_UI_THEME = 'STORAGE_DEMO_UI_THEME';
+
+/**
+ * 应用布局偏好的 Pinia 持久化键。
+ */
+export const PINIA_DEMO_LAYOUT = 'PINIA_DEMO_LAYOUT';
+```
+
+- 不使用双下划线包裹、`APP_*`、旧系统的 `__PINIA_*__` 或临时缩写。
+- 不在页面、指令、Store 和服务中复制字符串字面量；动态账号维度的键由常量模块统一提供生成函数。
+- Pinia Store 的 `id` 可使用简短业务名，例如 `layout`，不等于持久化 key；`persist.key` 必须显式指定对应常量。
+- 常规业务退出或清理操作只删除本应用明确拥有的键，不使用 `localStorage.clear()`、`sessionStorage.clear()` 或全量清 Cookie。
+- 版本更新需要清理状态时，按应用归属和迁移范围删除受影响的键。取消更新时保留存储数据。
+- 新旧系统的值不自动互通。确需迁移时显式读取旧键、校验和转换，再写入新键，不隐式复用旧数据。
+- 持久化结构不兼容时为具体存储项增加版本后缀并定义迁移策略，不为单项变化整体修改应用命名空间。
+
+## 读写职责
+
+- 普通 JSON 存储使用 `src/utils` 的 `getLocalStorage`、`setLocalStorage`、`removeLocalStorage`。sessionStorage 需要时另行封装，不直接复制散落的 JSON 逻辑。
+- Pinia 持久化由插件负责。业务代码通过 Store action 读写状态，不手工读取或篡改 Pinia 的序列化结果。
+- 服务层通过认证适配器读取凭证，不直接访问存储；权限指令通过响应式权限源读取状态，不直接访问存储。
+- 存储恢复内容按不可信缓存处理，需要校验结构、账号归属和有效期；缓存缺失或损坏不能让权限默认放行。
+
+## 权限与会话缓存
+
+- 权限列表优先作为会话状态，不默认持久化。确有缓存需求时，只用于加快界面准备，不能作为后端已确认权限的依据。
+- `ready`、加载状态、错误状态、权限已校验标记不持久化。刷新、重新登录、账号切换或退出时从未就绪状态开始。
+- 当前账号的权限接口成功后，再更新权限列表并设置 `ready = true`；失败保持未就绪，不回退到旧缓存授权。
+- 权限缓存必须与账号绑定。切换账号或退出时立即重置内存权限，并按具体缓存策略清理对应数据。
+- 前端权限只控制入口显示和交互，服务端必须独立检查接口权限。
