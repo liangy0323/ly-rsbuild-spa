@@ -47,7 +47,10 @@ test('克隆 JSON 自有属性时保留对象原型', () => {
 });
 
 test('读写和移除指定的存储键，损坏值按缺失处理', () => {
-  const items = new Map([['other', '1'], ['invalid', '{']]);
+  const items = new Map([
+    ['other', '1'],
+    ['invalid', '{'],
+  ]);
   rs.stubGlobal('window', {
     localStorage: {
       getItem: (key: string) => items.get(key) ?? null,

@@ -118,15 +118,15 @@ src/api/modules/live/
 
 ## 旧代码迁移参考
 
-| 原有组织方式 | 目标组织方式 | 迁移边界 |
-| --- | --- | --- |
-| 入口中集中的全局副作用 | `src/bootstrap/` | 按职责迁移启动逻辑，入口保留创建和挂载应用 |
-| `src/hooks/` | `src/composables/` 或页面私有 `composables/` | 分页、表单与业务流程按复用范围拆分 |
-| `src/api/<module>/` | `src/api/modules/<domain>/` | 保留 URL 和后端参数契约，集中类型 |
-| 全目录组件扫描 | 仅扫描 `components/base/` | 迁移页面时补齐业务、私有及布局组件显式导入 |
-| 全局与页面散落的类型 | `src/types/modules/` | 区分 HTTP 原始契约和前端统一视图模型 |
-| `assets/scss/` | `assets/styles/` | 迁移 SCSS 引用，不把样式重命名等同于视觉重做 |
-| 服务直接调用 UI 或跳转 | `services/` 协议与 `bootstrap/` 装配 | 保留登录与错误识别能力，调整依赖方向 |
+| 原有组织方式           | 目标组织方式                                 | 迁移边界                                     |
+| ---------------------- | -------------------------------------------- | -------------------------------------------- |
+| 入口中集中的全局副作用 | `src/bootstrap/`                             | 按职责迁移启动逻辑，入口保留创建和挂载应用   |
+| `src/hooks/`           | `src/composables/` 或页面私有 `composables/` | 分页、表单与业务流程按复用范围拆分           |
+| `src/api/<module>/`    | `src/api/modules/<domain>/`                  | 保留 URL 和后端参数契约，集中类型            |
+| 全目录组件扫描         | 仅扫描 `components/base/`                    | 迁移页面时补齐业务、私有及布局组件显式导入   |
+| 全局与页面散落的类型   | `src/types/modules/`                         | 区分 HTTP 原始契约和前端统一视图模型         |
+| `assets/scss/`         | `assets/styles/`                             | 迁移 SCSS 引用，不把样式重命名等同于视觉重做 |
+| 服务直接调用 UI 或跳转 | `services/` 协议与 `bootstrap/` 装配         | 保留登录与错误识别能力，调整依赖方向         |
 
 ## 测试布局
 

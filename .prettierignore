@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+.rstest/
+playwright-report/
+test-results/
+.husky/_
+pnpm-lock.yaml
+auto-imports.d.ts
+components.d.ts
+public/

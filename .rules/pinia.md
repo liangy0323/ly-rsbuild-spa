@@ -15,8 +15,6 @@ export const useLayoutStore = defineStore(
   () => {
     const isSidebarCollapsed = ref(false);
 
-
-
     const setSidebarCollapsed = (value: boolean): void => {
       isSidebarCollapsed.value = value;
     };

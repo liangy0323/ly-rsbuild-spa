@@ -68,7 +68,9 @@ pluginSass({
 ```scss
 @forward 'element-plus/theme-chalk/src/common/var.scss' with (
   $colors: (
-    'primary': ('base': #2f6feb),
+    'primary': (
+      'base': #2f6feb,
+    ),
   )
 );
 ```

@@ -4,10 +4,10 @@
 
 键名常量和实际存储值统一使用 UPPER_SNAKE_CASE，二者保持相同。固定前缀区分手工存储和 Pinia 持久化。各应用选择稳定的命名空间 `<APP>`，避免同源应用混用数据。下例用 `DEMO` 表示命名空间。
 
-| 用途 | 格式 | 示例 |
-| --- | --- | --- |
+| 用途                               | 格式                               | 示例                    |
+| ---------------------------------- | ---------------------------------- | ----------------------- |
 | 手工 localStorage / sessionStorage | `STORAGE_<APP>_<DOMAIN>_<PURPOSE>` | `STORAGE_DEMO_UI_THEME` |
-| Pinia 持久化 | `PINIA_<APP>_<STORE>` | `PINIA_DEMO_LAYOUT` |
+| Pinia 持久化                       | `PINIA_<APP>_<STORE>`              | `PINIA_DEMO_LAYOUT`     |
 
 新增业务实际需要存储时，先在 `src/constants/modules/storage.ts` 定义常量，再从 `@/constants` 导入。以下为命名示例，不要求提前创建未使用的存储项：
 

@@ -6,19 +6,19 @@
 
 参考工程为 `D:/hrhg-project/group-admin/admin-ddm-v2`。其中 `index.html` 在样式加载前恢复主题，`src/composables/use-theme.ts` 负责共享状态和切换动画，`src/assets/styles/modules/theme.scss` 维护应用语义变量，`src/assets/element-plus/modules/dark.scss` 把这些变量映射到 Element Plus。
 
-| 文件 | 职责 |
-| --- | --- |
-| `build/rsbuild.base.config.ts` | 配置 Sass 按需加载并向 HTML 传入存储键 |
-| `index.html` | 首次绘制前恢复 `html[data-theme]` |
-| `src/constants/modules/storage.ts` | 定义当前应用的主题偏好存储键 |
-| `src/composables/use-theme.ts` | 维护主题状态、保存偏好、运行切换动画 |
-| `src/assets/styles/modules/tokens.scss` | 声明稳定的色板、间距和字体等基础值 |
-| `src/assets/styles/modules/theme.scss` | 为浅色和暗色提供页面、文字、边框、交互等语义变量 |
-| `src/assets/element-plus/modules/var.scss` | 编译期品牌色、字体等 Element Plus Sass 变量 |
-| `src/assets/element-plus/modules/dark.scss` | 暗色下将 `--el-*` 桥接到应用变量 |
-| `src/assets/styles/modules/component-overrides.scss` | 按组件公开类名组织全局覆盖，按需创建 |
-| `src/assets/styles/modules/theme-transition.scss` | 仅在手动切换期间管理新旧快照层 |
-| `src/assets/styles/index.scss` | 由应用入口一次性引入的全局样式 |
+| 文件                                                 | 职责                                             |
+| ---------------------------------------------------- | ------------------------------------------------ |
+| `build/rsbuild.base.config.ts`                       | 配置 Sass 按需加载并向 HTML 传入存储键           |
+| `index.html`                                         | 首次绘制前恢复 `html[data-theme]`                |
+| `src/constants/modules/storage.ts`                   | 定义当前应用的主题偏好存储键                     |
+| `src/composables/use-theme.ts`                       | 维护主题状态、保存偏好、运行切换动画             |
+| `src/assets/styles/modules/tokens.scss`              | 声明稳定的色板、间距和字体等基础值               |
+| `src/assets/styles/modules/theme.scss`               | 为浅色和暗色提供页面、文字、边框、交互等语义变量 |
+| `src/assets/element-plus/modules/var.scss`           | 编译期品牌色、字体等 Element Plus Sass 变量      |
+| `src/assets/element-plus/modules/dark.scss`          | 暗色下将 `--el-*` 桥接到应用变量                 |
+| `src/assets/styles/modules/component-overrides.scss` | 按组件公开类名组织全局覆盖，按需创建             |
+| `src/assets/styles/modules/theme-transition.scss`    | 仅在手动切换期间管理新旧快照层                   |
+| `src/assets/styles/index.scss`                       | 由应用入口一次性引入的全局样式                   |
 
 ## 1. 在首屏绘制前恢复主题
 
@@ -288,15 +288,15 @@ html[data-theme-transition='active'] {
 
 ## 5. 验收清单
 
-| 场景 | 预期 |
-| --- | --- |
-| 清空主题键后打开网站 | 首屏使用浅色 |
-| 已保存暗色后直接打开深层路由或刷新 | HTML 在样式渲染前恢复暗色，Vue 挂载后状态一致 |
-| 点击切换、按 Enter 切换 | 分别从鼠标位置、按钮中心展开；切换完成后按钮可再次操作 |
-| 减少动效、浏览器不支持 View Transition | 主题直接切换，偏好仍可恢复 |
-| 存储不可用或键值损坏 | 页面正常显示，无法读取偏好时使用浅色 |
-| 打开 Dialog、Select 下拉层、消息提示 | Teleport 到 `body` 的内容也使用暗色，文字、边框和背景匹配 |
-| 检查禁用、激活、悬浮等状态 | 可读且可区分，重点核对实心按钮、表单和下拉列表 |
-| 在两个路由间跳转或确认版本更新 | 主题偏好继续保留；刷新恢复时无切换动画 |
+| 场景                                   | 预期                                                      |
+| -------------------------------------- | --------------------------------------------------------- |
+| 清空主题键后打开网站                   | 首屏使用浅色                                              |
+| 已保存暗色后直接打开深层路由或刷新     | HTML 在样式渲染前恢复暗色，Vue 挂载后状态一致             |
+| 点击切换、按 Enter 切换                | 分别从鼠标位置、按钮中心展开；切换完成后按钮可再次操作    |
+| 减少动效、浏览器不支持 View Transition | 主题直接切换，偏好仍可恢复                                |
+| 存储不可用或键值损坏                   | 页面正常显示，无法读取偏好时使用浅色                      |
+| 打开 Dialog、Select 下拉层、消息提示   | Teleport 到 `body` 的内容也使用暗色，文字、边框和背景匹配 |
+| 检查禁用、激活、悬浮等状态             | 可读且可区分，重点核对实心按钮、表单和下拉列表            |
+| 在两个路由间跳转或确认版本更新         | 主题偏好继续保留；刷新恢复时无切换动画                    |
 
 用 `pnpm build` 和 `pnpm preview` 复验生产样式、HTML 模板和主题恢复。

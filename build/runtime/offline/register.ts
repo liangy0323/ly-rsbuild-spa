@@ -21,14 +21,12 @@ const serviceWorkerUrl: string = typeof __OFFLINE_SW_URL__ === 'string' ? __OFFL
 /**
  * 当前部署环境的 Service Worker 作用域
  */
-const serviceWorkerScope: string =
-  typeof __OFFLINE_SW_SCOPE__ === 'string' ? __OFFLINE_SW_SCOPE__ : './';
+const serviceWorkerScope: string = typeof __OFFLINE_SW_SCOPE__ === 'string' ? __OFFLINE_SW_SCOPE__ : './';
 
 /**
  * 新 Worker 安装完成后是否提示用户更新
  */
-const notifyUpdateReady: boolean =
-  typeof __OFFLINE_NOTIFY_UPDATE__ === 'boolean' ? __OFFLINE_NOTIFY_UPDATE__ : true;
+const notifyUpdateReady: boolean = typeof __OFFLINE_NOTIFY_UPDATE__ === 'boolean' ? __OFFLINE_NOTIFY_UPDATE__ : true;
 
 /**
  * 通知业务 bootstrap 当前 Service Worker 已准备好更新

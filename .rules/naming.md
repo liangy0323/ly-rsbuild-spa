@@ -2,24 +2,24 @@
 
 ## 一、格式总览
 
-| 类型               | 格式                          | 示例                                 |
-| ------------------ | ----------------------------- | ------------------------------------ |
-| 文件名             | kebab-case                    | `user-info.ts`、`service-im.ts`      |
-| Vue 组件（多文件） | kebab-case 目录 + `index.vue` | `chat-input/index.vue`          |
-| Vue 组件（单文件） | kebab-case.vue                | `icon-button.vue`                    |
-| 类型/接口          | PascalCase（无 `I` 前缀）     | `ChatMessage`、`SseConnectOptions`   |
+| 类型               | 格式                          | 示例                                     |
+| ------------------ | ----------------------------- | ---------------------------------------- |
+| 文件名             | kebab-case                    | `user-info.ts`、`service-im.ts`          |
+| Vue 组件（多文件） | kebab-case 目录 + `index.vue` | `chat-input/index.vue`                   |
+| Vue 组件（单文件） | kebab-case.vue                | `icon-button.vue`                        |
+| 类型/接口          | PascalCase（无 `I` 前缀）     | `ChatMessage`、`SseConnectOptions`       |
 | 常量               | UPPER_SNAKE_CASE              | `STORAGE_DEMO_UI_THEME`、`COLOR_PRIMARY` |
-| API 常量           | `API_<动词>_<名词>`           | `API_GET_HISTORY_LIST`               |
-| 函数/变量          | camelCase                     | `createWindow`、`messageList`        |
-| 事件处理函数       | `handle` 前缀                 | `handleSend`、`handleScroll`         |
-| Store              | `use<Domain>Store`            | `useChatStore`                       |
-| Composable         | `use<Feature>`                | `useChat`、`useScroll`               |
-| Helper 对象        | `<domain>Helper`              | `chatHelper`                         |
-| 引擎类             | PascalCase + `Engine`         | `SseEngine`                          |
-| CSS 变量           | `--<语义分类>-<属性>`         | `--color-primary`                    |
-| CSS 类名           | kebab-case                    | `chat-message-item`                  |
-| Pinia 持久化 key   | `PINIA_<APP>_<STORE>`            | `PINIA_DEMO_LAYOUT`                     |
-| 事件总线           | `EVENT_<动词>_<名词>`         | `EVENT_STOP_CHAT_STREAM`             |
+| API 常量           | `API_<动词>_<名词>`           | `API_GET_HISTORY_LIST`                   |
+| 函数/变量          | camelCase                     | `createWindow`、`messageList`            |
+| 事件处理函数       | `handle` 前缀                 | `handleSend`、`handleScroll`             |
+| Store              | `use<Domain>Store`            | `useChatStore`                           |
+| Composable         | `use<Feature>`                | `useChat`、`useScroll`                   |
+| Helper 对象        | `<domain>Helper`              | `chatHelper`                             |
+| 引擎类             | PascalCase + `Engine`         | `SseEngine`                              |
+| CSS 变量           | `--<语义分类>-<属性>`         | `--color-primary`                        |
+| CSS 类名           | kebab-case                    | `chat-message-item`                      |
+| Pinia 持久化 key   | `PINIA_<APP>_<STORE>`         | `PINIA_DEMO_LAYOUT`                      |
+| 事件总线           | `EVENT_<动词>_<名词>`         | `EVENT_STOP_CHAT_STREAM`                 |
 
 ---
 
